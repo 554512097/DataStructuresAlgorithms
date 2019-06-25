@@ -1,8 +1,7 @@
-#include "seq_list.h"
-#include "link_list.h"
 #include <stdio.h>
+#include "link_queue.h"
 
 int main() {
-    test_LinkList();
+    test_PLinkQueue();
     return 0;
 }

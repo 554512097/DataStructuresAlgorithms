@@ -5,4 +5,31 @@
 #ifndef DATASTRUCTURESALGORITHMS_DOUBLE_LINK_LIST_H
 #define DATASTRUCTURESALGORITHMS_DOUBLE_LINK_LIST_H
 
+typedef struct node {
+    void *data;
+    struct node *last;
+    struct node *next;
+} DNode, *PDNode;
+
+typedef struct d_link_list {
+    PDNode head;
+    int length;
+} DLinkList, *PDLinkList;
+
+PDLinkList PDLinkList_Init();
+
+int Destroy_PDLinkList(PDLinkList list);
+
+int Length_PDLinkList(PDLinkList list);
+
+int Locate_PDLinkList(PDLinkList list, void *item);
+
+int Insert_PDLinkList(PDLinkList list, int index, void *item);
+
+int Delete_PDLinkList(PDLinkList list, int index);
+
+int Add_PDLinkList(PDLinkList list, void *item);
+
+void test_PDLinkList();
+
 #endif //DATASTRUCTURESALGORITHMS_DOUBLE_LINK_LIST_H

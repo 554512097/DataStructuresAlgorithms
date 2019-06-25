@@ -5,10 +5,15 @@
 #ifndef DATASTRUCTURESALGORITHMS_LINK_LIST_H
 #define DATASTRUCTURESALGORITHMS_LINK_LIST_H
 
-typedef struct link_node {
+typedef struct node {
     void *data;
-    struct link_node *next;
-} LNode, *PLinkList;
+    struct node *next;
+} LNode, *PLNode;
+
+typedef struct link_list {
+    PLNode header;
+    int length;
+} LinkList, *PLinkList;
 
 PLinkList Init_LinkList();
 

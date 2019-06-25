@@ -1,4 +1,4 @@
-// 无头结点单向链表实现
+// 单向链表实现
 // Created by xiekun on 2019/6/21.
 //
 
@@ -7,63 +7,75 @@
 #include <stdio.h>
 
 PLinkList Init_LinkList() {
-    PLinkList list = malloc(sizeof(LNode));
+    PLinkList list = malloc(sizeof(LinkList));
     if (list) {
-        list->data = NULL;
-        list->next = NULL;
+        list->header = NULL;
+        list->length = 0;
         return list;
     }
     return NULL;
 }
 
 int Destroy_LinkList(PLinkList list) {
-    while (list) {
-        free(list);
-        list = list->next;
+    PLNode item = list->header;
+    while (item) {
+        PLNode next = item->next;
+        free(item);
+        item = next;
     }
+    free(list);
     return 1;
 }
 
 int Length_LinkList(PLinkList list) {
-    PLinkList header = list;
-    int length = 0;
-    while (header) {
-        length++;
-        header = header->next;
+    if (list) {
+        return list->length;
     }
-    return length;
+    return -1;
 }
 
 int Locate_LinkList(PLinkList list, void *item) {
-    PLinkList header = list;
+    PLNode iter = list->header;
     int index = 0;
-    while (header) {
+    while (iter) {
         index++;
-        if (header->data == item) {
+        if (iter->data == item) {
             return index;
         }
-        header = header->next;
+        iter = iter->next;
     }
     return -1;
 }
 
 int Insert_LinkList(PLinkList list, int index, void *item) {
-    PLinkList header = list;
+    PLNode iter = list->header;
+    if (index < 0 || index > list->length) {
+        return 0;
+    }
+
+    if (index == 0) {
+        PLNode insert = malloc(sizeof(LNode));
+        insert->data = item;
+        insert->next = iter;
+        list->header = insert;
+        return 1;
+    }
+
     int i = 0;
-    PLinkList previous = NULL, posterior = NULL;
-    while (header) {
-        i++;
+    PLNode previous = NULL, posterior = NULL;
+    while (iter) {
         if (i == index - 1) {
-            previous = header;
+            previous = iter;
         }
         if (i == index) {
-            posterior = header;
+            posterior = iter;
             break;
         }
-        header = header->next;
+        iter = iter->next;
+        i++;
     }
     if (previous && posterior) {
-        PLinkList insert = malloc(sizeof(LNode));
+        PLNode insert = malloc(sizeof(LNode));
         insert->data = item;
         insert->next = posterior;
         previous->next = insert;
@@ -73,22 +85,22 @@ int Insert_LinkList(PLinkList list, int index, void *item) {
 }
 
 int Delete_LinkList(PLinkList list, int index) {
-    PLinkList header = list;
+    PLNode iter = list->header;
     int i = 0;
-    PLinkList previous = NULL, posterior = NULL, deleted = NULL;
-    while (header) {
+    PLNode previous = NULL, posterior = NULL, deleted = NULL;
+    while (iter) {
         i++;
         if (i == index - 1) {
-            previous = header;
+            previous = iter;
         }
         if (i == index) {
-            deleted = header;
+            deleted = iter;
         }
         if (i == index + 1) {
-            posterior = header;
+            posterior = iter;
             break;
         }
-        header = header->next;
+        iter = iter->next;
     }
     if (previous && deleted && posterior) {
         previous->next = posterior;
@@ -99,20 +111,24 @@ int Delete_LinkList(PLinkList list, int index) {
 }
 
 int Add_LinkList(PLinkList list, void *item) {
-    if (list && list->data == NULL) {
-        list->data = item;
-        return 1;
-    }
-    PLinkList header = list;
-    while (header) {
-        if (header->next == NULL) {
-            PLinkList node = malloc(sizeof(LNode));
-            node->data = item;
-            node->next = NULL;
-            header->next = node;
+    if (list) {
+        PLNode header = list->header;
+        PLNode node = malloc(sizeof(LNode));
+        node->data = item;
+        node->next = NULL;
+        if (header == NULL) {
+            list->header = node;
+            list->length++;
             return 1;
         }
-        header = header->next;
+        while (header) {
+            if (header->next == NULL) {
+                header->next = node;
+                list->length++;
+                return 1;
+            }
+            header = header->next;
+        }
     }
     return 0;
 }
@@ -128,9 +144,11 @@ void test_LinkList() {
     Insert_LinkList(list, 3, "7");
     Delete_LinkList(list, 4);
     int i = 0;
-    while (list) {
-        printf("item %d is : %s\n", i, (char *) list->data);
-        list = list->next;
+    PLNode item = list->header;
+    while (item) {
+        printf("item %d is : %s\n", i, (char *) item->data);
+        item = item->next;
         i++;
     }
+    Destroy_LinkList(list);
 }
