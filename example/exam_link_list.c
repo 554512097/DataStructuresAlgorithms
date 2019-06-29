@@ -13,27 +13,27 @@ typedef struct node {
 } LNode, *LinkList;
 
 LinkList Create_LinkList() {
-    LinkList H;
-    H = malloc(sizeof(LNode));
-    if (H) {
-        H->next = NULL;
+    LinkList h;
+    h = malloc(sizeof(LNode));
+    if (h) {
+        h->next = NULL;
     }
-    return H;
+    return h;
 }
 
-void Destroy_LinkList(LinkList H) {
+void Destroy_LinkList(LinkList h) {
     LinkList p, q;
-    p = H;
+    p = h;
     while (p) {
         q = p;
         p = p->next;
         free(q);
     }
-    H = NULL;
+    h = NULL;
 }
 
-int Lenth_LinkList(LinkList H) {
-    LinkList p = H;
+int Lenth_LinkList(LinkList h) {
+    LinkList p = h;
     int count = 1;
     while (p) {
         p = p->next;
@@ -42,10 +42,10 @@ int Lenth_LinkList(LinkList H) {
     return count;
 }
 
-LinkList Locate_LinkList_Pos(LinkList H, int i) {
+LinkList Locate_LinkList_Pos(LinkList h, int i) {
     LinkList p;
     int j;
-    p = H;
+    p = h;
     j = 0;
     while (p && j < i) {
         p = p->next;
@@ -58,17 +58,17 @@ LinkList Locate_LinkList_Pos(LinkList H, int i) {
     return p;
 }
 
-LinkList Locate_LinkList_Value(LinkList H, DataType x) {
-    LinkList p = H->next;
+LinkList Locate_LinkList_Value(LinkList h, DataType x) {
+    LinkList p = h->next;
     while (p && p->data != x) {
         p = p->next;
     }
     return p;
 }
 
-int Insert_LinkList(LinkList H, int i, DataType x) {
+int Insert_LinkList(LinkList h, int i, DataType x) {
     LinkList p, q;
-    p = Locate_LinkList_Pos(H, i - 1);
+    p = Locate_LinkList_Pos(h, i - 1);
     if (!p) {
         printf("i有误");
         return 0;
@@ -84,13 +84,13 @@ int Insert_LinkList(LinkList H, int i, DataType x) {
     return 1;
 }
 
-int Del_LinkList(LinkList H, int i) {
+int Del_LinkList(LinkList h, int i) {
     LinkList p, q;
-    if (H == NULL || H->next == NULL) {
+    if (h == NULL || h->next == NULL) {
         printf("链表不存在或空表不能删除");
         return 0;
     }
-    p = Locate_LinkList_Pos(H, i - 1);
+    p = Locate_LinkList_Pos(h, i - 1);
     if (p == NULL || p->next == NULL) {
         printf("参数i错误");
         return 0;
@@ -101,26 +101,26 @@ int Del_LinkList(LinkList H, int i) {
     return 1;
 }
 
-void Reverse_LinkList(LinkList H) {
+void Reverse_LinkList(LinkList h) {
     LinkList p, q;
-    p = H->next;
-    H->next = NULL;
+    p = h->next;
+    h->next = NULL;
     while (p) {
         q = p;
         p = p->next;
-        q->next = H->next;
-        H->next = q;
+        q->next = h->next;
+        h->next = q;
     }
 }
 
-void Inter_sec(LinkList A, LinkList B) {
+void Inter_sec(LinkList a, LinkList b) {
     DataType x;
     LinkList pre, p;
-    pre = A;
+    pre = a;
     p = pre->next;
     while (p) {
         x = p->data;
-        if (!Locate_LinkList_Value(B, x)) {
+        if (!Locate_LinkList_Value(b, x)) {
             pre->next = p->next;
             free(p);
             p = pre->next;
@@ -131,14 +131,14 @@ void Inter_sec(LinkList A, LinkList B) {
     }
 }
 
-void Merge_sec(LinkList A, LinkList B) {
+void Merge_sec(LinkList a, LinkList b) {
     DataType x;
     LinkList p;
-    p = B->next;
+    p = b->next;
     while (p) {
         x = p->data;
-        if (!Locate_LinkList_Value(A, x)) {
-            Insert_LinkList(A, 1, x);
+        if (!Locate_LinkList_Value(a, x)) {
+            Insert_LinkList(a, 1, x);
         }
         p = p->next;
     }

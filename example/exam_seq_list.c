@@ -14,68 +14,68 @@ typedef struct node {
 } SeqList, *PSeqList;
 
 PSeqList Init_SeqList() {
-    PSeqList PL;
-    PL = (PSeqList) malloc(sizeof(SeqList));
-    if (PL)
-        PL->length = 0;
-    return PL;
+    PSeqList pl;
+    pl = (PSeqList) malloc(sizeof(SeqList));
+    if (pl)
+        pl->length = 0;
+    return pl;
 }
 
-int Length_SeqList(PSeqList PL) {
-    return PL->length;
+int Length_SeqList(PSeqList pl) {
+    return pl->length;
 }
 
-int Location_SeqList(PSeqList PL, DataType x) {
+int Location_SeqList(PSeqList pl, DataType x) {
     int i = 0;
-    while (i < PL->length && PL->data[i] != x)
+    while (i < pl->length && pl->data[i] != x)
         i++;
-    if (i > PL->length)
+    if (i > pl->length)
         return 0;
     else
         return i + 1;
 }
 
-int Insert_SeqList(PSeqList PL, int i, DataType x) {
-    if (!PL) {
+int Insert_SeqList(PSeqList pl, int i, DataType x) {
+    if (!pl) {
         printf("表不存在");
         return -2;
     }
-    if (PL->length >= MAX_SIZE) {
+    if (pl->length >= MAX_SIZE) {
         printf("表溢出");
         return -1;
     }
-    if (i < 1 || i > PL->length - 1) {
+    if (i < 1 || i > pl->length - 1) {
         printf("插入位置不合法");
     }
-    for (int j = PL->length - 1; j > i - 1; j--) {
-        PL->data[j + 1] = PL->data[j];
+    for (int j = pl->length - 1; j > i - 1; j--) {
+        pl->data[j + 1] = pl->data[j];
     }
-    PL->data[i - 1] = x;
-    PL->length++;
+    pl->data[i - 1] = x;
+    pl->length++;
     return 1;
 }
 
-int Delete_SeqList(PSeqList PL, int i) {
-    if (!PL) {
+int Delete_SeqList(PSeqList pl, int i) {
+    if (!pl) {
         printf("表不存在");
         return -2;
     }
-    if (i < 1 || i > PL->length - 1) {
+    if (i < 1 || i > pl->length - 1) {
         printf("插入位置不合法");
     }
-    for (int j = i; j < PL->length; j++) {
-        PL->data[j - 1] = PL->data[j];
+    for (int j = i; j < pl->length; j++) {
+        pl->data[j - 1] = pl->data[j];
     }
-    PL->length--;
+    pl->length--;
     return 1;
 }
 
 //a与b的交集
-void Inter_sec(PSeqList A, PSeqList B) {
+void Inter_sec(PSeqList a, PSeqList b) {
     int i = 0;
-    while (i < A->length) {
-        if (!Location_SeqList(B, A->data[i])) {
-            Delete_SeqList(A, i + 1);
+    while (i < a->length) {
+        if (!Location_SeqList(b, a->data[i])) {
+            Delete_SeqList(a, i + 1);
         } else {
             i++;
         }
@@ -83,10 +83,10 @@ void Inter_sec(PSeqList A, PSeqList B) {
 }
 
 //a与b的并集
-void Merge_sec(PSeqList A, PSeqList B) {
-    for (int i = 0; i < B->length; ++i) {
-        if (!Location_SeqList(A, B->data[i])) {
-            Insert_SeqList(A, A->length + 1, B->data[i]);
+void Merge_sec(PSeqList a, PSeqList b) {
+    for (int i = 0; i < b->length; ++i) {
+        if (!Location_SeqList(a, b->data[i])) {
+            Insert_SeqList(a, a->length + 1, b->data[i]);
         }
     }
 }

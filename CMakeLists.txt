@@ -10,4 +10,4 @@ include_directories(example)
 aux_source_directory(linear_table LINEAR_TABLE_SRC)
 aux_source_directory(example EXAMPLE_SRC)
 
-add_executable(DataStructuresAlgorithms main.c ${LINEAR_TABLE_SRC} ${EXAMPLE_SRC} example/exam_seq_list.c example/exam_link_list.c example/exam_seq_stack.c)
+add_executable(DataStructuresAlgorithms main.c ${LINEAR_TABLE_SRC} ${EXAMPLE_SRC} example/exam_seq_list.c example/exam_link_list.c example/exam_seq_stack.c example/exam_link_stack.c example/exam_seq_queue.c example/exam_link_queue.c)
