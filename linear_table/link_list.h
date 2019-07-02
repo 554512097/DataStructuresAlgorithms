@@ -15,19 +15,19 @@ typedef struct link_list {
     int length;
 } LinkList, *PLinkList;
 
-PLinkList Init_LinkList();
+PLinkList Init_LinkList_impl();
 
-int Destroy_LinkList(PLinkList list);
+int Destroy_LinkList_impl(PLinkList list);
 
-int Length_LinkList(PLinkList list);
+int Length_LinkList_impl(PLinkList list);
 
-int Locate_LinkList(PLinkList list, void *item);
+int Locate_LinkList_impl(PLinkList list, void *item);
 
-int Insert_LinkList(PLinkList list, int index, void *item);
+int Insert_LinkList_impl(PLinkList list, int index, void *item);
 
-int Delete_LinkList(PLinkList list, int index);
+int Delete_LinkList_impl(PLinkList list, int index);
 
-int Add_LinkList(PLinkList list, void *item);
+int Add_LinkList_impl(PLinkList list, void *item);
 
 void test_LinkList();
 

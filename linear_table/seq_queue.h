@@ -13,17 +13,17 @@ typedef struct queue {
     int tail;
 } SeqQueue, *PSeqQueue;
 
-PSeqQueue PSeqQueue_init();
+PSeqQueue PSeqQueue_init_impl();
 
-int PSeqQueue_add(PSeqQueue, void *);
+int PSeqQueue_add_impl(PSeqQueue, void *);
 
-void *PSeqQueue_peek(PSeqQueue);
+void *PSeqQueue_peek_impl(PSeqQueue);
 
-int PSeqQueue_destroy(PSeqQueue);
+int PSeqQueue_destroy_impl(PSeqQueue);
 
-int PSeqQueue_isFull(PSeqQueue queue);
+int PSeqQueue_isFull_impl(PSeqQueue queue);
 
-int PSeqQueue_isEmpty(PSeqQueue queue);
+int PSeqQueue_isEmpty_impl(PSeqQueue queue);
 
 void test_PSeqQueue();
 

@@ -5,7 +5,7 @@
 #include "seq_stack.h"
 #include <stdio.h>
 
-PStack PStack_Init() {
+PStack PStack_Init_impl() {
     PStack stack = malloc(sizeof(Stack));
     if (stack) {
 
@@ -15,7 +15,7 @@ PStack PStack_Init() {
     return NULL;
 }
 
-int PStack_Push(PStack stack, void *item) {
+int PStack_Push_impl(PStack stack, void *item) {
     if (stack) {
         if (stack->length >= MAX_SIZE) {
             return 0;
@@ -27,7 +27,7 @@ int PStack_Push(PStack stack, void *item) {
     return 0;
 }
 
-void *PStack_Pop(PStack stack) {
+void *PStack_Pop_impl(PStack stack) {
     if (stack) {
         if (stack->length <= 0) {
             return NULL;
@@ -39,7 +39,7 @@ void *PStack_Pop(PStack stack) {
     return NULL;
 }
 
-int PStack_Destroy(PStack stack) {
+int PStack_Destroy_impl(PStack stack) {
     if (stack) {
         free(stack->data);
         free(stack);
@@ -50,14 +50,14 @@ int PStack_Destroy(PStack stack) {
 }
 
 void test_PStack() {
-    PStack stack = PStack_Init();
-    PStack_Push(stack, "1");
-    PStack_Push(stack, "2");
-    PStack_Push(stack, "3");
-    PStack_Push(stack, "4");
+    PStack stack = PStack_Init_impl();
+    PStack_Push_impl(stack, "1");
+    PStack_Push_impl(stack, "2");
+    PStack_Push_impl(stack, "3");
+    PStack_Push_impl(stack, "4");
     void *item;
-    while ((item = PStack_Pop(stack))) {
+    while ((item = PStack_Pop_impl(stack))) {
         printf("%s\n", (char *) item);
     }
-    PStack_Destroy(stack);
+    PStack_Destroy_impl(stack);
 }

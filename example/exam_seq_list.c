@@ -71,7 +71,7 @@ int Delete_SeqList(PSeqList pl, int i) {
 }
 
 //a与b的交集
-void Inter_sec(PSeqList a, PSeqList b) {
+void Inter_sec_SeqList(PSeqList a, PSeqList b) {
     int i = 0;
     while (i < a->length) {
         if (!Location_SeqList(b, a->data[i])) {
@@ -83,7 +83,7 @@ void Inter_sec(PSeqList a, PSeqList b) {
 }
 
 //a与b的并集
-void Merge_sec(PSeqList a, PSeqList b) {
+void Merge_sec_SeqList(PSeqList a, PSeqList b) {
     for (int i = 0; i < b->length; ++i) {
         if (!Location_SeqList(a, b->data[i])) {
             Insert_SeqList(a, a->length + 1, b->data[i]);

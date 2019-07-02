@@ -6,28 +6,28 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-PSeqQueue PSeqQueue_init() {
+PSeqQueue PSeqQueue_init_impl() {
     PSeqQueue queue = malloc(sizeof(SeqQueue));
     queue->head = 0;
     queue->tail = 0;
 }
 
-int PSeqQueue_add(PSeqQueue queue, void *item) {
-    if (queue && !PSeqQueue_isFull(queue)) {
+int PSeqQueue_add_impl(PSeqQueue queue, void *item) {
+    if (queue && !PSeqQueue_isFull_impl(queue)) {
         queue->data[queue->tail++] = item;
         return 1;
     }
     return 0;
 }
 
-void *PSeqQueue_peek(PSeqQueue queue) {
-    if (queue && !PSeqQueue_isEmpty(queue)) {
+void *PSeqQueue_peek_impl(PSeqQueue queue) {
+    if (queue && !PSeqQueue_isEmpty_impl(queue)) {
         return queue->data[queue->head++];
     }
     return NULL;
 }
 
-int PSeqQueue_destroy(PSeqQueue queue) {
+int PSeqQueue_destroy_impl(PSeqQueue queue) {
     if (queue) {
         free(queue);
         queue = NULL;
@@ -36,7 +36,7 @@ int PSeqQueue_destroy(PSeqQueue queue) {
     return 0;
 }
 
-int PSeqQueue_isFull(PSeqQueue queue) {
+int PSeqQueue_isFull_impl(PSeqQueue queue) {
     if (queue) {
         if ((queue->tail - queue->head) >= 10) {
             return 1;
@@ -45,7 +45,7 @@ int PSeqQueue_isFull(PSeqQueue queue) {
     return 0;
 }
 
-int PSeqQueue_isEmpty(PSeqQueue queue) {
+int PSeqQueue_isEmpty_impl(PSeqQueue queue) {
     if (queue) {
         if (queue->tail == queue->head) {
             return 1;
@@ -55,20 +55,20 @@ int PSeqQueue_isEmpty(PSeqQueue queue) {
 }
 
 void test_PSeqQueue() {
-    PSeqQueue queue = PSeqQueue_init();
-    PSeqQueue_add(queue, "1");
-    PSeqQueue_add(queue, "2");
-    PSeqQueue_add(queue, "6");
-    PSeqQueue_add(queue, "3");
-    PSeqQueue_add(queue, "11");
-    PSeqQueue_add(queue, "5");
-    PSeqQueue_add(queue, "4");
-    PSeqQueue_add(queue, "9");
-    PSeqQueue_add(queue, "8");
-    PSeqQueue_add(queue, "7");
-    PSeqQueue_add(queue, "10");
-    while (!PSeqQueue_isEmpty(queue)) {
-        printf("%s\n", (char *) PSeqQueue_peek(queue));
+    PSeqQueue queue = PSeqQueue_init_impl();
+    PSeqQueue_add_impl(queue, "1");
+    PSeqQueue_add_impl(queue, "2");
+    PSeqQueue_add_impl(queue, "6");
+    PSeqQueue_add_impl(queue, "3");
+    PSeqQueue_add_impl(queue, "11");
+    PSeqQueue_add_impl(queue, "5");
+    PSeqQueue_add_impl(queue, "4");
+    PSeqQueue_add_impl(queue, "9");
+    PSeqQueue_add_impl(queue, "8");
+    PSeqQueue_add_impl(queue, "7");
+    PSeqQueue_add_impl(queue, "10");
+    while (!PSeqQueue_isEmpty_impl(queue)) {
+        printf("%s\n", (char *) PSeqQueue_peek_impl(queue));
     }
-    PSeqQueue_destroy(queue);
+    PSeqQueue_destroy_impl(queue);
 }

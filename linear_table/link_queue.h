@@ -16,17 +16,17 @@ typedef struct {
     int length;
 } LinkQueue, *PLinkQueue;
 
-PLinkQueue PLinkQueue_init();
+PLinkQueue PLinkQueue_init_impl();
 
-int PLinkQueue_add(PLinkQueue queue, void *item);
+int PLinkQueue_add_impl(PLinkQueue queue, void *item);
 
-void *PLinkQueue_peek(PLinkQueue queue);
+void *PLinkQueue_peek_impl(PLinkQueue queue);
 
-int PLinkQueue_destroy(PLinkQueue queue);
+int PLinkQueue_destroy_impl(PLinkQueue queue);
 
-int PLinkQueue_isFull(PLinkQueue queue);
+int PLinkQueue_isFull_impl(PLinkQueue queue);
 
-int PLinkQueue_isEmpty(PLinkQueue queue);
+int PLinkQueue_isEmpty_impl(PLinkQueue queue);
 
 void test_PLinkQueue();
 

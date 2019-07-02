@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-PLinkList Init_LinkList() {
+PLinkList Init_LinkList_impl() {
     PLinkList list = malloc(sizeof(LinkList));
     if (list) {
         list->header = NULL;
@@ -16,7 +16,7 @@ PLinkList Init_LinkList() {
     return NULL;
 }
 
-int Destroy_LinkList(PLinkList list) {
+int Destroy_LinkList_impl(PLinkList list) {
     PLNode item = list->header;
     while (item) {
         PLNode next = item->next;
@@ -27,14 +27,14 @@ int Destroy_LinkList(PLinkList list) {
     return 1;
 }
 
-int Length_LinkList(PLinkList list) {
+int Length_LinkList_impl(PLinkList list) {
     if (list) {
         return list->length;
     }
     return -1;
 }
 
-int Locate_LinkList(PLinkList list, void *item) {
+int Locate_LinkList_impl(PLinkList list, void *item) {
     PLNode iter = list->header;
     int index = 0;
     while (iter) {
@@ -47,7 +47,7 @@ int Locate_LinkList(PLinkList list, void *item) {
     return -1;
 }
 
-int Insert_LinkList(PLinkList list, int index, void *item) {
+int Insert_LinkList_impl(PLinkList list, int index, void *item) {
     PLNode iter = list->header;
     if (index < 0 || index > list->length) {
         return 0;
@@ -84,7 +84,7 @@ int Insert_LinkList(PLinkList list, int index, void *item) {
     return 0;
 }
 
-int Delete_LinkList(PLinkList list, int index) {
+int Delete_LinkList_impl(PLinkList list, int index) {
     PLNode iter = list->header;
     int i = 0;
     PLNode previous = NULL, posterior = NULL, deleted = NULL;
@@ -110,7 +110,7 @@ int Delete_LinkList(PLinkList list, int index) {
     return 0;
 }
 
-int Add_LinkList(PLinkList list, void *item) {
+int Add_LinkList_impl(PLinkList list, void *item) {
     if (list) {
         PLNode header = list->header;
         PLNode node = malloc(sizeof(LNode));
@@ -134,15 +134,15 @@ int Add_LinkList(PLinkList list, void *item) {
 }
 
 void test_LinkList() {
-    PLinkList list = Init_LinkList();
-    Add_LinkList(list, "1");
-    Add_LinkList(list, "2");
-    Add_LinkList(list, "3");
-    Add_LinkList(list, "4");
-    Add_LinkList(list, "5");
-    Add_LinkList(list, "6");
-    Insert_LinkList(list, 3, "7");
-    Delete_LinkList(list, 4);
+    PLinkList list = Init_LinkList_impl();
+    Add_LinkList_impl(list, "1");
+    Add_LinkList_impl(list, "2");
+    Add_LinkList_impl(list, "3");
+    Add_LinkList_impl(list, "4");
+    Add_LinkList_impl(list, "5");
+    Add_LinkList_impl(list, "6");
+    Insert_LinkList_impl(list, 3, "7");
+    Delete_LinkList_impl(list, 4);
     int i = 0;
     PLNode item = list->header;
     while (item) {
@@ -150,5 +150,5 @@ void test_LinkList() {
         item = item->next;
         i++;
     }
-    Destroy_LinkList(list);
+    Destroy_LinkList_impl(list);
 }

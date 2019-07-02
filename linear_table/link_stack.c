@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-PLinkStack PLinkStack_Init() {
+PLinkStack PLinkStack_Init_impl() {
     PLinkStack stack = malloc(sizeof(LinkStack));
     if (stack) {
         stack->length = 0;
@@ -15,7 +15,7 @@ PLinkStack PLinkStack_Init() {
     return stack;
 }
 
-int PLinkStack_Push(PLinkStack stack, void *item) {
+int PLinkStack_Push_impl(PLinkStack stack, void *item) {
     PSNode push = malloc(sizeof(SNode));
     push->data = item;
     push->bottom = NULL;
@@ -33,7 +33,7 @@ int PLinkStack_Push(PLinkStack stack, void *item) {
     return 0;
 }
 
-void *PLinkStack_Pop(PLinkStack stack) {
+void *PLinkStack_Pop_impl(PLinkStack stack) {
     if (stack) {
         PSNode top = stack->top;
         if (top) {
@@ -45,7 +45,7 @@ void *PLinkStack_Pop(PLinkStack stack) {
     return NULL;
 }
 
-int PLinkStack_Destroy(PLinkStack stack) {
+int PLinkStack_Destroy_impl(PLinkStack stack) {
     if (stack) {
         PSNode next;
         while (stack->top) {
@@ -61,16 +61,16 @@ int PLinkStack_Destroy(PLinkStack stack) {
 }
 
 void test_PLinkStack() {
-    PLinkStack stack = PLinkStack_Init();
-    PLinkStack_Push(stack, "1");
-    PLinkStack_Push(stack, "2");
-    PLinkStack_Push(stack, "3");
-    PLinkStack_Push(stack, "4");
-    PLinkStack_Push(stack, "5");
-    PLinkStack_Push(stack, "6");
+    PLinkStack stack = PLinkStack_Init_impl();
+    PLinkStack_Push_impl(stack, "1");
+    PLinkStack_Push_impl(stack, "2");
+    PLinkStack_Push_impl(stack, "3");
+    PLinkStack_Push_impl(stack, "4");
+    PLinkStack_Push_impl(stack, "5");
+    PLinkStack_Push_impl(stack, "6");
     void *item;
-    while ((item = PLinkStack_Pop(stack))) {
+    while ((item = PLinkStack_Pop_impl(stack))) {
         printf("%s\n", (char *) item);
     }
-    PLinkStack_Destroy(stack);
+    PLinkStack_Destroy_impl(stack);
 }

@@ -15,13 +15,13 @@ typedef struct {
     PSNode top;
 } LinkStack, *PLinkStack;
 
-PLinkStack PLinkStack_Init();
+PLinkStack PLinkStack_Init_impl();
 
-int PLinkStack_Push(PLinkStack, void *);
+int PLinkStack_Push_impl(PLinkStack, void *);
 
-void *PLinkStack_Pop(PLinkStack);
+void *PLinkStack_Pop_impl(PLinkStack stack);
 
-int PLinkStack_Destroy(PLinkStack);
+int PLinkStack_Destroy_impl(PLinkStack stack);
 
 void test_PLinkStack();
 

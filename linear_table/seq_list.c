@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-PSeqList Init_SeqList() {
+PSeqList Init_SeqList_impl() {
     PSeqList pSeqList = malloc(sizeof(SeqList));
     if (pSeqList) {
         pSeqList->length = 0;
@@ -15,7 +15,7 @@ PSeqList Init_SeqList() {
     return NULL;
 }
 
-int Destroy_SeqList(PSeqList list) {
+int Destroy_SeqList_impl(PSeqList list) {
     if (list) {
         free(list);
         return 1;
@@ -23,14 +23,14 @@ int Destroy_SeqList(PSeqList list) {
     return 0;
 }
 
-int Length_SeqList(PSeqList list) {
+int Length_SeqList_impl(PSeqList list) {
     if (list) {
         return list->length;
     }
     return 0;
 }
 
-int Locate_SeqList(PSeqList list, void *item) {
+int Locate_SeqList_impl(PSeqList list, void *item) {
     if (list) {
         int i = 0;
         int length = list->length;
@@ -44,7 +44,7 @@ int Locate_SeqList(PSeqList list, void *item) {
     return -1;
 }
 
-int Insert_SeqList(PSeqList list, int index, void *item) {
+int Insert_SeqList_impl(PSeqList list, int index, void *item) {
     if (list) {
         if (index > list->length) {
             return 0;
@@ -60,7 +60,7 @@ int Insert_SeqList(PSeqList list, int index, void *item) {
     return 0;
 }
 
-int Delete_SeqList(PSeqList list, int index) {
+int Delete_SeqList_impl(PSeqList list, int index) {
     if (list) {
         if (index > list->length) {
             return 0;
@@ -77,7 +77,7 @@ int Delete_SeqList(PSeqList list, int index) {
     return 0;
 }
 
-int Add_Seqlist(PSeqList list, void *item) {
+int Add_Seqlist_impl(PSeqList list, void *item) {
     if (list) {
         list->data[list->length++] = item;
         return list->length;
@@ -86,22 +86,22 @@ int Add_Seqlist(PSeqList list, void *item) {
 }
 
 void test_SeqList() {
-    PSeqList list = Init_SeqList();
-    Add_Seqlist(list, "1");
-    Add_Seqlist(list, "2");
-    Add_Seqlist(list, "3");
-    Add_Seqlist(list, "4");
-    Add_Seqlist(list, "5");
-    Add_Seqlist(list, "6");
-    Add_Seqlist(list, "7");
-    Insert_SeqList(list, 3, "8");
-    Delete_SeqList(list, 2);
-    int index = Locate_SeqList(list, "5");
+    PSeqList list = Init_SeqList_impl();
+    Add_Seqlist_impl(list, "1");
+    Add_Seqlist_impl(list, "2");
+    Add_Seqlist_impl(list, "3");
+    Add_Seqlist_impl(list, "4");
+    Add_Seqlist_impl(list, "5");
+    Add_Seqlist_impl(list, "6");
+    Add_Seqlist_impl(list, "7");
+    Insert_SeqList_impl(list, 3, "8");
+    Delete_SeqList_impl(list, 2);
+    int index = Locate_SeqList_impl(list, "5");
     printf("index : %d\n", index);
     for (int i = 0; i < list->length; ++i) {
         printf("item of i : %s\n", (char *) list->data[i]);
     }
-    int destroyResult = Destroy_SeqList(list);
+    int destroyResult = Destroy_SeqList_impl(list);
     printf("destroyResult : %d\n", destroyResult);
 }
 

@@ -16,19 +16,19 @@ typedef struct d_link_list {
     int length;
 } DLinkList, *PDLinkList;
 
-PDLinkList PDLinkList_Init();
+PDLinkList PDLinkList_Init_impl();
 
-int Destroy_PDLinkList(PDLinkList list);
+int Destroy_PDLinkList_impl(PDLinkList list);
 
-int Length_PDLinkList(PDLinkList list);
+int Length_PDLinkList_impl(PDLinkList list);
 
-int Locate_PDLinkList(PDLinkList list, void *item);
+int Locate_PDLinkList_impl(PDLinkList list, void *item);
 
-int Insert_PDLinkList(PDLinkList list, int index, void *item);
+int Insert_PDLinkList_impl(PDLinkList list, int index, void *item);
 
-int Delete_PDLinkList(PDLinkList list, int index);
+int Delete_PDLinkList_impl(PDLinkList list, int index);
 
-int Add_PDLinkList(PDLinkList list, void *item);
+int Add_PDLinkList_impl(PDLinkList list, void *item);
 
 void test_PDLinkList();
 

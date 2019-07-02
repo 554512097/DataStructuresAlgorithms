@@ -8,7 +8,7 @@
 
 #define MAX_SIZE 10
 
-PLinkQueue PLinkQueue_init() {
+PLinkQueue PLinkQueue_init_impl() {
     PLinkQueue queue = malloc(sizeof(LinkQueue));
     if (queue) {
         queue->head = NULL;
@@ -18,8 +18,8 @@ PLinkQueue PLinkQueue_init() {
     return queue;
 }
 
-int PLinkQueue_add(PLinkQueue queue, void *item) {
-    if (queue && !PLinkQueue_isFull(queue)) {
+int PLinkQueue_add_impl(PLinkQueue queue, void *item) {
+    if (queue && !PLinkQueue_isFull_impl(queue)) {
         PQNode add = malloc(sizeof(QNode));
         add->data = item;
         add->next = NULL;
@@ -36,8 +36,8 @@ int PLinkQueue_add(PLinkQueue queue, void *item) {
     return 0;
 }
 
-void *PLinkQueue_peek(PLinkQueue queue) {
-    if (queue && !PLinkQueue_isEmpty(queue)) {
+void *PLinkQueue_peek_impl(PLinkQueue queue) {
+    if (queue && !PLinkQueue_isEmpty_impl(queue)) {
         PQNode peek = queue->head;
         if (peek) {
             if (queue->head->next) {
@@ -53,7 +53,7 @@ void *PLinkQueue_peek(PLinkQueue queue) {
     return NULL;
 }
 
-int PLinkQueue_destroy(PLinkQueue queue) {
+int PLinkQueue_destroy_impl(PLinkQueue queue) {
     if (queue) {
         PQNode next;
         while (queue->head) {
@@ -67,14 +67,14 @@ int PLinkQueue_destroy(PLinkQueue queue) {
     return 0;
 }
 
-int PLinkQueue_isFull(PLinkQueue queue) {
+int PLinkQueue_isFull_impl(PLinkQueue queue) {
     if (queue->length >= MAX_SIZE) {
         return 1;
     }
     return 0;
 }
 
-int PLinkQueue_isEmpty(PLinkQueue queue) {
+int PLinkQueue_isEmpty_impl(PLinkQueue queue) {
     if (queue->length == 0) {
         return 1;
     }
@@ -82,21 +82,21 @@ int PLinkQueue_isEmpty(PLinkQueue queue) {
 }
 
 void test_PLinkQueue() {
-    PLinkQueue queue = PLinkQueue_init();
-    PLinkQueue_add(queue, "1");
-    PLinkQueue_add(queue, "2");
-    PLinkQueue_add(queue, "3");
-    PLinkQueue_add(queue, "4");
-    PLinkQueue_add(queue, "5");
-    PLinkQueue_add(queue, "6");
-    PLinkQueue_add(queue, "7");
-    PLinkQueue_add(queue, "8");
-    PLinkQueue_add(queue, "9");
-    PLinkQueue_add(queue, "10");
-    PLinkQueue_add(queue, "11");
-    PLinkQueue_add(queue, "12");
-    while (!PLinkQueue_isEmpty(queue)) {
-        printf("%s\n", (char *) PLinkQueue_peek(queue));
+    PLinkQueue queue = PLinkQueue_init_impl();
+    PLinkQueue_add_impl(queue, "1");
+    PLinkQueue_add_impl(queue, "2");
+    PLinkQueue_add_impl(queue, "3");
+    PLinkQueue_add_impl(queue, "4");
+    PLinkQueue_add_impl(queue, "5");
+    PLinkQueue_add_impl(queue, "6");
+    PLinkQueue_add_impl(queue, "7");
+    PLinkQueue_add_impl(queue, "8");
+    PLinkQueue_add_impl(queue, "9");
+    PLinkQueue_add_impl(queue, "10");
+    PLinkQueue_add_impl(queue, "11");
+    PLinkQueue_add_impl(queue, "12");
+    while (!PLinkQueue_isEmpty_impl(queue)) {
+        printf("%s\n", (char *) PLinkQueue_peek_impl(queue));
     }
-    PLinkQueue_destroy(queue);
+    PLinkQueue_destroy_impl(queue);
 }

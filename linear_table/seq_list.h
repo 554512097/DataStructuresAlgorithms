@@ -16,21 +16,21 @@ typedef struct seq_node {
  * 初始化顺序表
  * @return 0 初始化失败 非0成功
  */
-PSeqList Init_SeqList();
+PSeqList Init_SeqList_impl();
 
 /**
  * 销毁顺序表
  * @param list 要销毁的list
  * @return 0失败 1成功
  */
-int Destroy_SeqList(PSeqList list);
+int Destroy_SeqList_impl(PSeqList list);
 
 /**
  * 获取顺序表
  * @param list 操作的顺序表
  * @return 顺序表长度
  */
-int Length_SeqList(PSeqList list);
+int Length_SeqList_impl(PSeqList list);
 
 /**
  * 定位元素
@@ -38,7 +38,7 @@ int Length_SeqList(PSeqList list);
  * @param item 要查询的元素
  * @return 该元素在表中的第一次的索引 -1不存在
  */
-int Locate_SeqList(PSeqList list, void *item);
+int Locate_SeqList_impl(PSeqList list, void *item);
 
 /**
  * 插入元素
@@ -47,7 +47,7 @@ int Locate_SeqList(PSeqList list, void *item);
  * @param item 插入的元素
  * @return 0失败 1成功
  */
-int Insert_SeqList(PSeqList list, int index, void *item);
+int Insert_SeqList_impl(PSeqList list, int index, void *item);
 
 /**
  * 插入元素
@@ -55,7 +55,7 @@ int Insert_SeqList(PSeqList list, int index, void *item);
  * @param index 删除的索引
  * @return 0失败 1成功
  */
-int Delete_SeqList(PSeqList list, int index);
+int Delete_SeqList_impl(PSeqList list, int index);
 
 /**
  * 添加操作
@@ -63,7 +63,7 @@ int Delete_SeqList(PSeqList list, int index);
  * @param item 添加的元素
  * @return 元素的索引 -1失败
  */
-int Add_Seqlist(PSeqList list, void *item);
+int Add_Seqlist_impl(PSeqList list, void *item);
 
 void test_SeqList();
 

@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-PDLinkList PDLinkList_Init() {
+PDLinkList PDLinkList_Init_impl() {
     PDLinkList list = malloc(sizeof(DLinkList));
     if (list) {
         list->head = NULL;
@@ -16,7 +16,7 @@ PDLinkList PDLinkList_Init() {
     return NULL;
 }
 
-int Destroy_PDLinkList(PDLinkList list) {
+int Destroy_PDLinkList_impl(PDLinkList list) {
     PDNode iter = list->head;
     while (iter) {
         PDNode next = iter->next;
@@ -30,14 +30,14 @@ int Destroy_PDLinkList(PDLinkList list) {
     return 0;
 }
 
-int Length_PDLinkList(PDLinkList list) {
+int Length_PDLinkList_impl(PDLinkList list) {
     if (list) {
         return list->length;
     }
     return -1;
 }
 
-int Locate_PDLinkList(PDLinkList list, void *item) {
+int Locate_PDLinkList_impl(PDLinkList list, void *item) {
     PDNode iter = list->head;
     int index = 0;
     while (iter) {
@@ -50,7 +50,7 @@ int Locate_PDLinkList(PDLinkList list, void *item) {
     return -1;
 }
 
-int Insert_PDLinkList(PDLinkList list, int index, void *item) {
+int Insert_PDLinkList_impl(PDLinkList list, int index, void *item) {
     if (index < 0 || index > list->length) {
         return 0;
     }
@@ -83,7 +83,7 @@ int Insert_PDLinkList(PDLinkList list, int index, void *item) {
     return 0;
 }
 
-int Delete_PDLinkList(PDLinkList list, int index) {
+int Delete_PDLinkList_impl(PDLinkList list, int index) {
     if (index < 0 || index > list->length) {
         return 0;
     }
@@ -111,7 +111,7 @@ int Delete_PDLinkList(PDLinkList list, int index) {
     return 0;
 }
 
-int Add_PDLinkList(PDLinkList list, void *item) {
+int Add_PDLinkList_impl(PDLinkList list, void *item) {
     PDNode add = malloc(sizeof(PDNode));
     add->next = NULL;
     add->data = item;
@@ -136,17 +136,17 @@ int Add_PDLinkList(PDLinkList list, void *item) {
 }
 
 void test_PDLinkList() {
-    PDLinkList list = PDLinkList_Init();
-    Add_PDLinkList(list, "1");
-    Add_PDLinkList(list, "2");
-    Add_PDLinkList(list, "3");
-    Add_PDLinkList(list, "4");
-    Add_PDLinkList(list, "5");
-    Add_PDLinkList(list, "6");
-    Add_PDLinkList(list, "7");
-    Insert_PDLinkList(list, 2, "8");
-    Delete_PDLinkList(list, 5);
-    int index = Locate_PDLinkList(list, "4");
+    PDLinkList list = PDLinkList_Init_impl();
+    Add_PDLinkList_impl(list, "1");
+    Add_PDLinkList_impl(list, "2");
+    Add_PDLinkList_impl(list, "3");
+    Add_PDLinkList_impl(list, "4");
+    Add_PDLinkList_impl(list, "5");
+    Add_PDLinkList_impl(list, "6");
+    Add_PDLinkList_impl(list, "7");
+    Insert_PDLinkList_impl(list, 2, "8");
+    Delete_PDLinkList_impl(list, 5);
+    int index = Locate_PDLinkList_impl(list, "4");
     printf("4 index is : %d\n", index);
     PDNode iter = list->head;
     while (iter) {

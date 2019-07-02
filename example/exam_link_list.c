@@ -113,7 +113,7 @@ void Reverse_LinkList(LinkList h) {
     }
 }
 
-void Inter_sec(LinkList a, LinkList b) {
+void Inter_sec_LinkList(LinkList a, LinkList b) {
     DataType x;
     LinkList pre, p;
     pre = a;
@@ -131,7 +131,7 @@ void Inter_sec(LinkList a, LinkList b) {
     }
 }
 
-void Merge_sec(LinkList a, LinkList b) {
+void Merge_sec_LinkList(LinkList a, LinkList b) {
     DataType x;
     LinkList p;
     p = b->next;

@@ -12,13 +12,13 @@ typedef struct {
     int length;
 } Stack, *PStack;
 
-PStack PStack_Init();
+PStack PStack_Init_impl();
 
-int PStack_Push(PStack stack, void *item);
+int PStack_Push_impl(PStack stack, void *item);
 
-void *PStack_Pop(PStack stack);
+void *PStack_Pop_impl(PStack stack);
 
-int PStack_Destroy(PStack);
+int PStack_Destroy_impl(PStack);
 
 void test_PStack();
 
