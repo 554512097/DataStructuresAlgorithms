@@ -32,7 +32,7 @@ void Destroy_LinkList(LinkList h) {
     h = NULL;
 }
 
-int Lenth_LinkList(LinkList h) {
+int Length_LinkList(LinkList h) {
     LinkList p = h;
     int count = 1;
     while (p) {

@@ -1,13 +1,15 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(DataStructuresAlgorithms C)
+project(DataStructuresAlgorithms)
 
-set(CMAKE_C_STANDARD 99)
+set(CMAKE_CXX_STANDARD 14)
 
-include_directories(linear_table)
-include_directories(example)
+include_directories(leetcode)
 
-aux_source_directory(linear_table LINEAR_TABLE_SRC)
-aux_source_directory(example EXAMPLE_SRC)
+aux_source_directory(leetcode LEETCODE)
 
-add_executable(DataStructuresAlgorithms main.c ${LINEAR_TABLE_SRC} ${EXAMPLE_SRC})
+add_executable(DataStructuresAlgorithms ${LEETCODE} main.cpp)
+
+#add_subdirectory(data_struct/cpp)
+
+#target_link_libraries(DataStructuresAlgorithms cpp_lib)
